@@ -1,0 +1,26 @@
+// ===Per Second===
+// Set percent mode
+$setparcentmode(1,1,1,1)
+
+// Variable definition
+$puts(info01_l,0)
+$puts(info01_t,0)
+$puts(info01_w,99)
+$puts(info01_h,100)
+
+// Info 01
+$font(%DefFont%,9,)
+$if(%_isplaying%,
+$drawtextex(
+  $if(%ispaused%,Paused,Playing):
+ $ifgreater($len([%title%]),50,$left([%title%],50)...,[%title%])
+$ifgreater($len([%artist%]),80,$left([ / %artist%],80)...,[ / %artist%])
+ '['%playback_time%[ / %length%]']',
+$get(info01_l),
+$get(info01_t),
+$get(info01_w),
+$get(info01_h),
+%Black%,
+left vcenter end_ellipsis
+),
+)

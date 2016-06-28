@@ -1,0 +1,10 @@
+// Global variables definition
+$init_ps_global(DefFont,'Yu Gothic UI') // Default font
+$init_ps_global(Padding,1) // Padding of panels
+$init_ps_global(Black,0-0-0)
+$init_ps_global(White,255-255-255)
+$init_ps_global(Blue01,229-243-255)
+$init_ps_global(Blue02,204-232-255)
+$init_ps_global(Blue03,145-201-247)
+$init_ps_global(Blue04,25-121-202)
+$init_ps_global(Blue05,0-122-217)

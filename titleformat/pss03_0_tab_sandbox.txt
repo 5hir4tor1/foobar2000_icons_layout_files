@@ -1,0 +1,52 @@
+// ===Per Track===
+// Variable definition
+$puts(width_50,$muldiv(%ps_width%,5,10))
+$puts(width_50_1,$sub(%ps_width%,$get(width_50)))
+$puts(height_95,$muldiv(%ps_height%,95,100))
+$puts(height_5,$sub(%ps_height%,$get(height_95)))
+
+$puts(pro_l,%padding%)
+$puts(pro_t,%padding%)
+$puts(pro_w,$sub($get(width_50),$mul(%padding%,2)))
+$puts(pro_h,$sub($get(height_95),$mul(%padding%,2)))
+
+$puts(console_l,$add($get(width_50),%padding%))
+$puts(console_t,%padding%)
+$puts(console_w,$sub($get(width_50_1),$mul(%padding%,2)))
+$puts(console_h,$sub($get(height_95),$mul(%padding%,2)))
+
+$puts(pbi02_l,%padding%)
+$puts(pbi02_t,$add($get(height_95),%padding%))
+$puts(pbi02_w,$sub(%ps_width%,$mul(%padding%,2)))
+$puts(pbi02_h,$sub($get(height_5),$mul(%padding%,2)))
+
+
+// Item propaties
+$drawrect(
+$get(pro_l),
+$get(pro_t),
+$get(pro_w),
+$get(pro_h),
+%Black%,
+,
+)
+
+// Console
+$drawrect(
+$get(console_l),
+$get(console_t),
+$get(console_w),
+$get(console_h),
+%Black%,
+,
+)
+
+// Playback info
+$drawrect(
+$get(pbi02_l),
+$get(pbi02_t),
+$get(pbi02_w),
+$get(pbi02_h),
+%Black%,
+,
+)

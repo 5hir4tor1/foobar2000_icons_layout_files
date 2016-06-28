@@ -1,0 +1,52 @@
+// ===Per Track===
+// Variable definition
+$puts(width_85,$muldiv(%ps_width%,85,100))
+$puts(width_15,$sub(%ps_width%,$get(width_85)))
+$puts(height_95,$muldiv(%ps_height%,95,100))
+$puts(height_5,$sub(%ps_height%,$get(height_95)))
+
+$puts(cpl_l,%padding%)
+$puts(cpl_t,%padding%)
+$puts(cpl_w,$sub($get(width_85),$mul(%padding%,2)))
+$puts(cpl_h,$sub($get(height_95),$mul(%padding%,2)))
+
+$puts(al_l,$add($get(width_85),%padding%))
+$puts(al_t,%padding%)
+$puts(al_w,$sub($get(width_15),$mul(%padding%,2)))
+$puts(al_h,$sub($get(height_95),$mul(%padding%,2)))
+
+$puts(pbi01_l,%padding%)
+$puts(pbi01_t,$add($get(height_95),%padding%))
+$puts(pbi01_w,$sub(%ps_width%,$mul(%padding%,2)))
+$puts(pbi01_h,$sub($get(height_5),$mul(%padding%,2)))
+
+
+// Playlist tabs and Columns playlist
+$drawrect(
+$get(cpl_l),
+$get(cpl_t),
+$get(cpl_w),
+$get(cpl_h),
+%Black%,
+,
+)
+
+// Album list
+$drawrect(
+$get(al_l),
+$get(al_t),
+$get(al_w),
+$get(al_h),
+%Black%,
+,
+)
+
+// Playback info
+$drawrect(
+$get(pbi01_l),
+$get(pbi01_t),
+$get(pbi01_w),
+$get(pbi01_h),
+%Black%,
+,
+)

@@ -1,0 +1,516 @@
+// ===Per Track===
+// ------------------------
+//  Debug mode flag
+$puts(DebugFlg,0)
+// ------------------------
+
+// ------------------------
+// Test func.
+$put(test_r1,$add($mod(%length_samples%,128),128))
+$put(test_g1,$add($mod(%length_seconds%,128),128))
+$put(test_b1,$add($mod($add($get(test_r1),$get(test_g1)),128),128))
+$put(test_r2,$add($mod($add($get(test_r1),42),128),128))
+$put(test_g2,$add($mod($add($get(test_g1),42),128),128))
+$put(test_b2,$add($mod($add($get(test_r2),$get(test_g2)),128),128))
+$put(test_r3,$add($mod($add($get(test_r2),42),128),128))
+$put(test_g3,$add($mod($add($get(test_g2),42),128),128))
+$put(test_b3,$add($mod($add($get(test_r3),$get(test_g3)),128),128))
+// ------------------------
+
+// ------------------------
+// Set percent mode
+$setparcentmode(1,1,1,1)
+// Variable definition
+$put(artwork_l,7)
+$put(artwork_t,5)
+$put(artwork_w,25)
+$put(artwork_h,75)
+
+$put(infoarea_l,3)
+$put(infoarea_t,59)
+$put(infoarea_w,94)
+$put(infoarea_h,37)
+$put(infoarea_rw,3)
+$put(infoarea_rh,6)
+
+$put(spl1_l,36)
+$put(spl1_t,82)
+$put(spl1_w,57)
+$put(spl1_h,2)
+
+$put(spl2_l,36)
+$put(spl2_t,87)
+$put(spl2_w,57)
+$put(spl2_h,2)
+
+$put(seekbar_l,7)
+$put(seekbar_t,90)
+$put(seekbar_w,25)
+$put(seekbar_h,3)
+
+$put(button_l,36)
+$put(button_t,90)
+$put(button_w,32)
+$put(button_h,3)
+
+$put(pbo_l,83)
+$put(pbo_t,90)
+$put(pbo_w,10)
+$put(pbo_h,3)
+
+$put(csp_l,36)
+$put(csp_t,5)
+$put(csp_w,57)
+$put(csp_h,49)
+
+$put(title_l,37)
+$put(title_t,61)
+$put(title_w,56)
+$put(title_h,7)
+
+$put(artist_l,37)
+$put(artist_t,68)
+$put(artist_w,56)
+$put(artist_h,7)
+
+$put(album_l,37)
+$put(album_t,75)
+$put(album_w,56)
+$put(album_h,7)
+// ------------------------
+
+// ------------------------
+// Background
+// Variable deifinition
+$setparcentmode(0,0,0,0)
+$put(bg_rand,117) // $mod(%length_seconds%,174)
+$put(bg_path,
+'C:\Users\Umeda\Pictures\foobar2000_Background\fb2k_bg('$get(bg_rand)').jpg')
+$put(bg_l,0)
+$put(bg_t,0)
+$put(bg_w,%ps_width%)
+$put(bg_h,%ps_height%)
+
+$drawrect(
+$get(bg_l),
+$get(bg_t),
+$get(bg_w),
+$get(bg_h),
+%Black%,
+%Black%,
+
+)
+
+$imageabs(
+$sub($get(bg_l),),
+$sub($get(bg_t),50),
+$add($get(bg_w),),
+$add($get(bg_h),100),
+$get(bg_path),
+,
+,
+196,
+
+)
+// ------------------------
+
+// $textbutton(1,1,5,5,Refresh,Refresh,REFRESH,
+// fontcolor:255-255-255 brushcolor:0-0-0-255 pencolor:255-255-255-255,
+// fontcolor:0-0-0 brushcolor:255-255-255-255 pencolor:0-0-0-255)
+
+// ------------------------
+// Draw track info area
+$setparcentmode(1,1,1,1)
+// $drawrect( 
+$drawroundrect(
+$get(infoarea_l),
+$get(infoarea_t),
+$get(infoarea_w),
+$get(infoarea_h),
+$get(infoarea_rw),
+$get(infoarea_rh),
+%Black%-128,
+%White%-255,
+
+)
+
+// Draw artwork
+$if(
+%_isplaying%,
+$if(
+[$imageabs(,,,,%path%,nodisplay artreader,,,)],
+$imageabs(
+$get(artwork_l),
+$get(artwork_t),
+$get(artwork_w),
+$get(artwork_h),
+%path%,
+bottom artreader,
+,
+255,
+glow:5:%White% offset:0:0
+),
+$imageabs(
+$get(artwork_l),
+$get(artwork_t),
+$get(artwork_w),
+$get(artwork_h),
+'C:\Program Files (x86)\foobar2000\Default.png',
+bottom,
+,
+255,
+glow:5:%White% offset:0:0
+)
+)
+)
+// ------------------------
+
+// ------------------------
+// Draw deco rect
+$setparcentmode(1,1,0,1)
+$drawrect(
+$sub($get(title_l),1),
+$get(title_t),
+3,
+$get(title_h),
+$get(test_r1)-$get(test_g1)-$get(test_b1)-128,
+$get(test_r1)-$get(test_g1)-$get(test_b1)-255,
+
+)
+
+$drawrect(
+$sub($get(artist_l),1),
+$get(artist_t),
+3,
+$get(artist_h),
+$get(test_r2)-$get(test_g2)-$get(test_b2)-128,
+$get(test_r2)-$get(test_g2)-$get(test_b2)-255,
+
+)
+$drawrect(
+$sub($get(album_l),1),
+$get(album_t),
+3,
+$get(album_h),
+$get(test_r3)-$get(test_g3)-$get(test_b3)-128,
+$get(test_r3)-$get(test_g3)-$get(test_b3)-255,
+
+)
+// ------------------------
+
+// ------------------------
+// Splitter
+$setparcentmode(1,1,1,1)
+$font(%DefFont%,9,)
+$drawtextex(
+─────────────────────────────────────────────────────────────────,
+$get(spl1_l),
+$get(spl1_t),
+$get(spl1_w),
+$get(spl1_h),
+%White%,
+left vcenter
+)
+
+$font(%DefFont%,9,)
+$drawtextex(
+─────────────────────────────────────────────────────────────────,
+$get(spl2_l),
+$get(spl2_t),
+$get(spl2_w),
+$get(spl2_h),
+%White%,
+left vcenter
+)
+// ------------------------
+
+// ------------------------
+// Title
+$font(%DefFont%,19,bold)
+$if(%_isplaying%,
+$drawtextex(
+[%title%],
+$get(title_l),
+$get(title_t),
+$get(title_w),
+$get(title_h),
+%White%,
+left vcenter end_ellipsis
+)
+)
+// ------------------------
+
+// ------------------------
+// Artist
+$font(%DefFont%,12,)
+$if(%_isplaying%,
+$drawtextex(
+$meta_sep(artist,', '),
+$get(artist_l),
+$get(artist_t),
+$get(artist_w),
+$get(artist_h),
+%White%,
+left wrap end_ellipsis
+)
+)
+// ------------------------
+
+// ------------------------
+// Album
+$font(%DefFont%,12,)
+$if(%_isplaying%,
+$drawtextex(
+[%album%],
+$get(album_l),
+$get(album_t),
+$get(album_w),
+$get(album_h),
+%White%,
+left wrap end_ellipsis
+)
+)
+// ------------------------
+
+// ------------------------
+// run on Debug mode only
+$ifequal($get(DebugFlg),1,
+$drawrect(
+$get(artwork_l),
+$get(artwork_t),
+$get(artwork_w),
+$get(artwork_h),
+%White%-128,
+%White%-255,
+
+)
+$drawrect(
+$get(spl1_l),
+$get(spl1_t),
+$get(spl1_w),
+$get(spl1_h),
+%White%-128,
+%White%-255,
+
+)
+$drawrect(
+$get(spl2_l),
+$get(spl2_t),
+$get(spl2_w),
+$get(spl2_h),
+%White%-128,
+%White%-255,
+
+)
+
+$drawrect(
+$get(seekbar_l),
+$get(seekbar_t),
+$get(seekbar_w),
+$get(seekbar_h),
+%Blue03%-128,
+%Blue03%-255,
+
+)
+$drawrect(
+$get(button_l),
+$get(button_t),
+$get(button_w),
+$get(button_h),
+%Blue03%-128,
+%Blue03%-255,
+
+)
+$drawrect(
+$get(pbo_l),
+$get(pbo_t),
+$get(pbo_w),
+$get(pbo_h),
+%White%-128,
+%White%-255,
+
+)
+$drawrect(
+$get(csp_l),
+$get(csp_t),
+$get(csp_w),
+$get(csp_h),
+%White%-128,
+%White%-255,
+
+)
+$drawrect(
+$get(title_l),
+$get(title_t),
+$get(title_w),
+$get(title_h),
+%Blue03%-128,
+%Blue03%-255,
+
+)
+$drawrect(
+$get(artist_l),
+$get(artist_t),
+$get(artist_w),
+$get(artist_h),
+%Blue03%-128,
+%Blue03%-255,
+
+)
+$drawrect(
+$get(album_l),
+$get(album_t),
+$get(album_w),
+$get(album_h),
+%Blue03%-128,
+%Blue03%-255,
+
+)
+$font(14,%DefFont%,Bold)
+$drawtextex(
+bg_left: $get(bg_l),
+5,
+0,
+10,
+5,
+%Blue03%,
+left vcenter
+)
+$drawtextex(
+bg_top: $get(bg_t),
+0,
+5,
+10,
+5,
+%Blue03%,
+left vcenter
+)
+$drawtextex(
+bg_width: $get(bg_w),
+90,
+0,
+10,
+5,
+%Blue03%,
+left vcenter
+)
+$drawtextex(
+bg_height: $get(bg_h),
+0,
+95,
+10,
+5,
+%Blue03%,
+left vcenter
+)
+$drawtextex(
+bg_rand: $get(bg_rand),
+90,
+95,
+10,
+5,
+%Blue03%,
+left vcenter
+)
+$drawtextex(test_r1: $get(test_r1),0,15,10,5,%Blue03%,left vcenter)
+$drawtextex(test_g1: $get(test_g1),0,20,10,5,%Blue03%,left vcenter)
+$drawtextex(test_b1: $get(test_b1),0,25,10,5,%Blue03%,left vcenter)
+$drawtextex(test_r2: $get(test_r2),10,15,10,5,%Blue03%,left vcenter)
+$drawtextex(test_g2: $get(test_g2),10,20,10,5,%Blue03%,left vcenter)
+$drawtextex(test_b2: $get(test_b2),10,25,10,5,%Blue03%,left vcenter)
+$drawtextex(test_r3: $get(test_r3),20,15,10,5,%Blue03%,left vcenter)
+$drawtextex(test_g3: $get(test_g3),20,20,10,5,%Blue03%,left vcenter)
+$drawtextex(test_b3: $get(test_b3),20,25,10,5,%Blue03%,left vcenter)
+,
+)
+
+
+// ===Per Second===
+// ------------------------
+// Set percent mode
+$setparcentmode(1,1,1,1)
+// ------------------------
+
+// ------------------------
+//  Debug mode flag
+$puts(DebugFlg,0)
+// ------------------------
+
+// ------------------------
+// Variable definition
+$put(trackinfo_l,36)
+$put(trackinfo_t,84)
+$put(trackinfo_w,57)
+$put(trackinfo_h,3)
+
+$put(ptime_l,7)
+$put(ptime_t,83)
+$put(ptime_w,25)
+$put(ptime_h,6)
+// ------------------------
+
+// ------------------------
+// Track info
+$font(%DefFont%,11,)
+$if(%_isplaying%,
+$drawtextex(
+%codec% [%codec_profile%] | %bitrate% kbps | %samplerate% Hz | $caps(%channels%) | 
+$if([%replaygain_track_gain%],%replaygain_track_gain%,N/A) / 
+$if([%replaygain_album_gain%],%replaygain_album_gain%,N/A) | 
+$if([%filesize_natural%],[%filesize_natural%],N/A) | 
+Played %play_count% times,
+$get(trackinfo_l),
+$get(trackinfo_t),
+$get(trackinfo_w),
+$get(trackinfo_h),
+%White%,
+left vcenter end_ellipsis
+)
+)
+// ------------------------
+
+// ------------------------
+// Play time
+$font(%DefFont%,13,Bold)
+$if(%_isplaying%,
+$drawtext(
+[%_time_elapsed%][ / %_time_total%],
+$get(ptime_l),
+$get(ptime_t),
+$get(ptime_w),
+$get(ptime_h),
+%White%,
+hcenter vcenter
+)
+)
+// ------------------------
+
+// ------------------------
+// Progress bar
+// $drawrect(10,90,30,1,%White%,%White%,)
+// $drawrect(10,90,$muldiv($div($mul(%playback_time_seconds%,100),$mul(%length_seconds%)),30,100),1,%Blue05%,,)
+// ------------------------
+
+// ------------------------
+// run on Debug mode only
+$ifequal($get(DebugFlg),1,
+$drawrect(
+$get(trackinfo_l),
+$get(trackinfo_t),
+$get(trackinfo_w),
+$get(trackinfo_h),
+%Blue05%-128,
+%Blue05%-255,
+
+)
+$drawrect(
+$get(ptime_l),
+$get(ptime_t),
+$get(ptime_w),
+$get(ptime_h),
+%Blue05%-128,
+%Blue05%-255,
+
+)
+,
+)
