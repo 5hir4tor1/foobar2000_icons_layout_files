@@ -6,15 +6,15 @@ $puts(DebugFlg,0)
 
 // ------------------------
 // Test func.
-$put(test_r1,$add($mod(%length_samples%,128),128))
-$put(test_g1,$add($mod(%length_seconds%,128),128))
-$put(test_b1,$add($mod($add($get(test_r1),$get(test_g1)),128),128))
-$put(test_r2,$add($mod($add($get(test_r1),42),128),128))
-$put(test_g2,$add($mod($add($get(test_g1),42),128),128))
-$put(test_b2,$add($mod($add($get(test_r2),$get(test_g2)),128),128))
-$put(test_r3,$add($mod($add($get(test_r2),42),128),128))
-$put(test_g3,$add($mod($add($get(test_g2),42),128),128))
-$put(test_b3,$add($mod($add($get(test_r3),$get(test_g3)),128),128))
+$put(test_r1,$add($mod(%length_samples%,192),64))
+$put(test_g1,$add($mod(%length_seconds%,192),64))
+$put(test_b1,$add($mod($add($get(test_r1),$get(test_g1)),192),64))
+$put(test_r2,$add($mod($add($get(test_r1),85),192),64))
+$put(test_g2,$add($mod($add($get(test_g1),85),192),64))
+$put(test_b2,$add($mod($add($get(test_r2),$get(test_g2)),192),64))
+$put(test_r3,$add($mod($add($get(test_r2),85),192),64))
+$put(test_g3,$add($mod($add($get(test_g2),85),192),64))
+$put(test_b3,$add($mod($add($get(test_r3),$get(test_g3)),192),64))
 // ------------------------
 
 // ------------------------
@@ -173,7 +173,7 @@ $sub($get(title_l),1),
 $get(title_t),
 3,
 $get(title_h),
-$get(test_r1)-$get(test_g1)-$get(test_b1)-128,
+$get(test_r1)-$get(test_g1)-$get(test_b1)-192,
 $get(test_r1)-$get(test_g1)-$get(test_b1)-255,
 
 )
@@ -183,7 +183,7 @@ $sub($get(artist_l),1),
 $get(artist_t),
 3,
 $get(artist_h),
-$get(test_r2)-$get(test_g2)-$get(test_b2)-128,
+$get(test_r2)-$get(test_g2)-$get(test_b2)-192,
 $get(test_r2)-$get(test_g2)-$get(test_b2)-255,
 
 )
@@ -192,7 +192,7 @@ $sub($get(album_l),1),
 $get(album_t),
 3,
 $get(album_h),
-$get(test_r3)-$get(test_g3)-$get(test_b3)-128,
+$get(test_r3)-$get(test_g3)-$get(test_b3)-192,
 $get(test_r3)-$get(test_g3)-$get(test_b3)-255,
 
 )
